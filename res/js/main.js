@@ -1,6 +1,6 @@
 /* global ScrollMagic, Linear */
 
-(function($){
+(function ($) {
   "use strict";
 
   var $body = $('body');
@@ -11,11 +11,11 @@
     Shrink navigation.
   \*------------------------------------*/
 
-  $(window).scroll(function(){
-    if ($(document).scrollTop() > 80){
+  $(window).scroll(function () {
+    if ($(document).scrollTop() > 80) {
       $('.navbar').addClass('shrink');
     }
-    else{
+    else {
       $('.navbar').removeClass('shrink');
     }
   });
@@ -26,40 +26,40 @@
     Scroll to top.
   \*------------------------------------*/
 
-  $(window).scroll(function(){
-    if($(this).scrollTop() > 100){
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
       $('.scroll-to-top').fadeIn();
     }
-    else{
+    else {
       $('.scroll-to-top').fadeOut();
     }
   });
 
 
 
-  $(document).ready(function(){
+  $(document).ready(function () {
 
     /*------------------------------------*\
       Detect mobile device.
     \*------------------------------------*/
 
     var isMobile = {
-      Android: function(){
+      Android: function () {
         return navigator.userAgent.match(/Android/i);
       },
-      BlackBerry: function(){
+      BlackBerry: function () {
         return navigator.userAgent.match(/BlackBerry/i);
       },
-      iOS: function(){
+      iOS: function () {
         return navigator.userAgent.match(/iPhone|iPad|iPod/i);
       },
-      Opera: function(){
+      Opera: function () {
         return navigator.userAgent.match(/Opera Mini/i);
       },
-      Windows: function(){
+      Windows: function () {
         return navigator.userAgent.match(/IEMobile/i);
       },
-      any: function(){
+      any: function () {
         return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
       }
     };
@@ -74,14 +74,14 @@
       navHeight = 80,
       navHeightShrink = 61;
 
-    $(window).smartload(function(){
+    $(window).smartload(function () {
       $body.scrollspy({
         target: '#navigation',
         offset: ww > 992 ? navHeightShrink : navHeight
       });
     });
 
-    $(window).smartresize(function(){
+    $(window).smartresize(function () {
       var dataScrollSpy = $body.data('bs.scrollspy'),
         ww = Math.max($(window).width(), window.innerWidth),
         offset = ww > 992 ? navHeightShrink : navHeight;
@@ -97,16 +97,16 @@
       Page scrolling feature.
     \*------------------------------------*/
 
-    $(window).smartload(function(){
+    $(window).smartload(function () {
       pageScroll();
     });
 
-    $(window).smartresize(function(){
+    $(window).smartresize(function () {
       pageScroll();
     });
 
-    function pageScroll(){
-      $('a.page-scroll').bind('click', function(e){
+    function pageScroll() {
+      $('a.page-scroll').bind('click', function (e) {
         var ww = Math.max($(window).width(), window.innerWidth),
           anchor = $(this),
           href = anchor.attr('href'),
@@ -129,11 +129,11 @@
       Gallery grid
     \*------------------------------------*/
 
-    if ($.fn.imagesLoaded && $.fn.isotope){
+    if ($.fn.imagesLoaded && $.fn.isotope) {
       var $galleryGrid = $('.gallery-grid');
 
-      $(window).smartload(function(){
-        $galleryGrid.imagesLoaded(function(){
+      $(window).smartload(function () {
+        $galleryGrid.imagesLoaded(function () {
           $galleryGrid.isotope({
             itemSelector: '.item',
             layoutMode: 'masonry'
@@ -141,13 +141,13 @@
         });
       });
 
-      $(window).smartresize(function(){
+      $(window).smartresize(function () {
         $galleryGrid.isotope('layout');
       });
 
       // Gallery filtering
       var $gridSelectors = $('.gallery-filter').find('a');
-      $gridSelectors.bind('click', function(e){
+      $gridSelectors.bind('click', function (e) {
         $gridSelectors.parent().removeClass('active');
         $(this).parent().addClass('active');
 
@@ -159,29 +159,29 @@
         e.preventDefault();
       });
     }
-    else{
+    else {
       console.log('Gallery grid: Plugin "imagesLoaded" is not loaded.');
       console.log('Gallery grid: Plugin "isotope" is not loaded.');
     }
 
     // Gallery magnific popup
-    if ($.fn.magnificPopup){
+    if ($.fn.magnificPopup) {
       $galleryGrid.magnificPopup({
         delegate: 'a',
         type: 'image',
         fixedContentPos: false,
         mainClass: 'mfp-fade',
-        gallery:{
+        gallery: {
           enabled: true,
           navigateByImgClick: true,
-          preload: [0,2],
+          preload: [0, 2],
           tPrev: 'Previous',
           tNext: 'Next',
           tCounter: '<span class="mfp-counter-curr">%curr%</span> of <span class="mfp-counter-total">%total%</span>'
         }
       });
     }
-    else{
+    else {
       console.log('Gallery magnific popup: Plugin "magnificPopup" is not loaded.');
     }
 
@@ -193,9 +193,9 @@
 
     var $featuresBox = $('.features-box');
 
-    if(isMobile.any()){
+    if (isMobile.any()) {
       $featuresBox.find('.show-on-hover').addClass('disabled');
-      $featuresBox.bind('click', function(e){
+      $featuresBox.bind('click', function (e) {
         $featuresBox.find('.show-on-hover').removeClass('active');
         $(this).find('.show-on-hover').addClass('active');
         e.preventDefault();
@@ -209,19 +209,19 @@
     \*------------------------------------*/
 
     // Home bg parallax (requires scrollmagic)
-    if(typeof ScrollMagic !== 'undefined'){
+    if (typeof ScrollMagic !== 'undefined') {
       // Init controller
-      var controller = new ScrollMagic.Controller({globalSceneOptions: {triggerHook: "onEnter", duration: "200%"}});
+      var controller = new ScrollMagic.Controller({ globalSceneOptions: { triggerHook: "onEnter", duration: "200%" } });
 
       // Build scenes
-      new ScrollMagic.Scene({triggerElement: "#home-bg-parallax"})
-          .setTween("#home-bg-parallax > .bg-parallax", {y: "80%", ease: Linear.easeNone})
-          .addTo(controller);
+      new ScrollMagic.Scene({ triggerElement: "#home-bg-parallax" })
+        .setTween("#home-bg-parallax > .bg-parallax", { y: "80%", ease: Linear.easeNone })
+        .addTo(controller);
     }
 
 
     // Home bg slideshow (requires flexslider)
-    if ($.fn.flexslider){
+    if ($.fn.flexslider) {
       $('.bg-slideshow-wrapper').flexslider({
         selector: '.slides > .bg-cover',
         easing: 'linear',
@@ -233,13 +233,13 @@
         touch: false
       });
     }
-    else{
+    else {
       console.log('Home bg slideshow: Plugin "flexslider" is not loaded.');
     }
 
 
     // Home bg slider (requires flickity)
-    if ($.fn.flickity){
+    if ($.fn.flickity) {
       $('.bg-slider-wrapper').flickity({
         cellAlign: 'left',
         contain: true,
@@ -250,13 +250,13 @@
         pauseAutoPlayOnHover: false
       });
     }
-    else{
+    else {
       console.log('Home bg slider: Plugin "flickity" is not loaded.');
     }
 
 
     // Section - Schedule (requires flickity)
-    if ($.fn.flickity){
+    if ($.fn.flickity) {
       var $carouselSchedule = $('.carousel-schedule');
       $carouselSchedule.flickity({
         cellAlign: 'left',
@@ -265,27 +265,27 @@
         pageDots: false
       });
 
-      $('.nav-tabs', '#schedule').children().bind('click', function(e){
+      $('.nav-tabs', '#schedule').children().bind('click', function (e) {
         $('.carousel-schedule').flickity('select', $(this).index());
       });
 
-      if(isMobile.any()){
+      if (isMobile.any()) {
         var flkty = $carouselSchedule.data('flickity');
-        $carouselSchedule.on('select.flickity', function(){
+        $carouselSchedule.on('select.flickity', function () {
           $('.nav-tabs', '#schedule').find('li:eq(' + flkty.selectedIndex + ') a').tab('show');
         });
       };
     }
-    else{
+    else {
       console.log('Section - Schedule: Plugin "flickity" is not loaded.');
     }
 
 
     // Section - FAQ (Accordions)
-    $('.panel-group').each(function(){
+    $('.panel-group').each(function () {
       var $panelGroupId = $('#' + $(this).attr('id'));
 
-      $(this).find('a').bind('click', function(e){
+      $(this).find('a').bind('click', function (e) {
         $panelGroupId.find('.panel').removeClass('active');
         $(this).parent().parent().parent().addClass('active');
       });
